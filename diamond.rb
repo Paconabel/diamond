@@ -1,33 +1,43 @@
-class Diamond
+class Diamond 
+	attr_accessor :letter
 
-  def print_diamond(letter)
-    diamond = ''
-    if letter == 'A'
-        diamond = "\n A "
-    end
-    if letter == 'B'
-        diamond = "\n A \nB B\n A "
-    end
-    if letter == 'C'
-        diamond = "\n  A  \n B B \nC   C\n B B \n  A  "
-    end
-    puts diamond
-    return diamond
-  end
+	def initialize(letter)
+		@letter = letter
+	end
 
-    def calculate_lines(letter)
-        number_of_lines = 0
-        if letter == 'A'
-            number_of_lines = 1
-        end
-        if letter == 'B'
-            number_of_lines = 3
-        end
-        if letter == 'C'
-            number_of_lines = 5
-        end
-        return number_of_lines
-    end
+	def print_diamond
 
+		letter_choose = @letter
+
+		letters = ('a'.."#{letter_choose}").to_a
+
+		total_letters = letters.size + 1
+		letter_number = letters.index("#{letter_choose}")
+
+		group = ""
+
+		letters.each_with_index do |letter,position|
+
+			if position == 0
+				line = ( "\n" + ("\s" * total_letters) + "A" + ("\s" * total_letters)) 
+			else
+				line = (("\s" * (total_letters - position))  + letter.upcase + ("\s" * ((position * 2) - 1)) + letter.upcase + ("\s" * (total_letters - position)))
+			end
+
+			group += (line + "\n")
+			
+		end
+
+		punta_diamante = group.split("\n")
+	
+		punta_diamante_reverse = punta_diamante.reverse.drop(1)
+		
+		poem = punta_diamante + punta_diamante_reverse
+
+		@letter = poem.join("\n")
+
+		return @letter
+
+	end	
 end
 

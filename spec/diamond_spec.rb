@@ -2,11 +2,20 @@ require_relative '../diamond'
 
 describe 'Diamond' do
     it 'prints A diamond' do
-        diamond = Diamond.new
-        letter = diamond.print_diamond('A')
-        expect(letter).to eq("\n A ")
+        letter = 'a'
+        diamond = Diamond.new(letter)
+       # letter = diamond.print_diamond('a')
+        expect(diamond.print_diamond).to eq("\n  A  \n")
     end
 
+    it 'prints A diamond' do
+        letter = 'c'
+        diamond = Diamond.new(letter)
+       # letter = diamond.print_diamond('a')
+        expect(diamond.print_diamond).to eq("\n    A    \n   B B   \n  C   C  \n   B B   \n    A    \n")
+    end
+
+/
     it 'prints B diamond' do
         diamond = Diamond.new
         result = diamond.print_diamond('B')
@@ -28,5 +37,6 @@ describe 'Diamond' do
         expect(letter_B).to eq(3)
         expect(letter_C).to eq(5)
     end
-
+/
 end
+
