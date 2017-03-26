@@ -1,33 +1,54 @@
-class Diamond
+class Diamond 
+    
+    SEPARADOR = "\s"
+    SALTO_LINEA = "\n"
 
-  def print_diamond(letter)
-    diamond = ''
-    if letter == 'A'
-        diamond = "\n A "
+    def initialize(letter)
+        @letter = letter
     end
-    if letter == 'B'
-        diamond = "\n A \nB B\n A "
-    end
-    if letter == 'C'
-        diamond = "\n  A  \n B B \nC   C\n B B \n  A  "
-    end
-    puts diamond
-    return diamond
-  end
 
-    def calculate_lines(letter)
-        number_of_lines = 0
-        if letter == 'A'
-            number_of_lines = 1
+    def print_diamond
+        
+        group = ""
+
+        letters_used.each_with_index do |letter,position|
+        
+        line = generate_line_for_letters(letter, position)
+        
+        group += (line + SALTO_LINEA)
+            
         end
-        if letter == 'B'
-            number_of_lines = 3
-        end
-        if letter == 'C'
-            number_of_lines = 5
-        end
-        return number_of_lines
+
+        diamond_point = group.split(SALTO_LINEA)
+    
+        diamond_point_reverse = diamond_point.reverse.drop(1)
+        
+        final_diamond = (diamond_point + diamond_point_reverse).join(SALTO_LINEA)
+
+        return final_diamond
+    puts final_diamond
+    end
+    private 
+
+    def generate_line_for_letters(letter, position) 
+    (blank_spaces(position)  + draw_letters(letter,position) + blank_spaces(position))  
+    end
+
+    def letters_used
+    ('a'..@letter).to_a
+    end
+
+    def total_letters_quantity
+    letters_used.size + 1       
+    end 
+
+    def blank_spaces(position)
+    (SEPARADOR * (total_letters_quantity - position -1))    
+    end
+
+    def draw_letters(letter,position)
+    return letter.upcase if position == 0 
+    letter.upcase + (SEPARADOR * ((position * 2) - 1)) + letter.upcase  
     end
 
 end
-
